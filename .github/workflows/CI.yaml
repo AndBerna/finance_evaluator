@@ -20,9 +20,9 @@ job:
         - name: Setup Python
           uses: actions/setup-python@v4 
             python-version: '3.9'
-
           # Need to cache dependencies to use poetry  https://github.com/marketplace/actions/setup-python
           with: 
+            python-version: '3.9'
             cache: 'poetry'
 
         - name: Install poetry dependencies
