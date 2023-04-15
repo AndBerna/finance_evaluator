@@ -1,9 +1,11 @@
 # An explanation on each parameter can be found at https://docs.github.com/en/actions/using-workflows/about-workflows
 name: CI 
-on:
-  pull request:
 
-job: 
+
+on:
+  pull_request:
+
+jobs: 
      linting:
       name: Check Formatting
       runs-on: ubuntu-latest
@@ -19,7 +21,6 @@ job:
         
         - name: Setup Python
           uses: actions/setup-python@v4 
-            python-version: '3.9'
           # Need to cache dependencies to use poetry  https://github.com/marketplace/actions/setup-python
           with: 
             python-version: '3.9'
