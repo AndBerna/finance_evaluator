@@ -30,9 +30,12 @@ jobs:
           run: |
              poetry install --only CI
 
-        - name: Test format
+        - name: Test python format with  black
           run: | 
             poetry run black --check .
+            
+        - name : Test python format with isort
+          run: |
             poetry run isort -c .
           
       
