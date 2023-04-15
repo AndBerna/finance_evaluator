@@ -10,12 +10,12 @@ job:
       steps:
         #allows to run scripts against your code
         - name: checkout 
-        uses: actions\checkout@v3
+          uses: actions\checkout@v3
 
         #sets up poetry for package management
         - name: Install Poetry 
-        run:
-          pipx install poetry 
+          run: |
+            pipx install poetry 
         
         - name: Setup Python
           uses: actions/setup-python@v4 
@@ -26,10 +26,12 @@ job:
             cache: 'poetry'
 
         - name: Install poetry dependencies
-          run: poetry install --only CI
+          run: |
+             poetry install --only CI
 
         - name: Test format
-          run: poetry run black --check
+          run: | 
+            poetry run black --check
           
       
 
