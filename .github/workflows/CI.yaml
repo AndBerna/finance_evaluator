@@ -33,6 +33,7 @@ jobs:
         - name: Test format
           run: | 
             poetry run black --check .
+            poetry run isort -c .
           
       
 
