@@ -1,32 +1,42 @@
 # An explanation on each parameter can be found at https://docs.github.com/en/actions/using-workflows/about-workflows
 name: CI 
-on:
-  pull request:
 
-job: 
+
+on:
+  pull_request:
+
+jobs: 
      linting:
       name: Check Formatting
       runs-on: ubuntu-latest
       steps:
-        name: checkout 
-        uses: actions\checkout@v3
+        #allows to run scripts against your code
+        - name: checkout 
+          uses: actions/checkout@v3
 
-        name: Install Poetry 
-        run:
-          pipx install poetry 
+        #sets up poetry for package management
+        - name: Install Poetry 
+          run: |
+            pipx install poetry 
         
-        name: Setup Python
+        - name: Setup Python
           uses: actions/setup-python@v4 
-            python-version: '3.9'
-
+          # Need to cache dependencies to use poetry  https://github.com/marketplace/actions/setup-python
           with: 
+            python-version: '3.11'
             cache: 'poetry'
 
-        name: Install poetry dependencies
-          run: poetry install --only CI
+        - name: Install poetry dependencies
+          run: |
+             poetry install --only CI
 
-        name: Test format
-        run: poetry run black --check
+        - name: Test python format with  black
+          run: | 
+            poetry run black --check .
+            
+        - name : Test python format with isort
+          run: |
+            poetry run isort -c .
           
       
 
