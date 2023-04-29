@@ -154,3 +154,20 @@ if file is not None or st.session_state.df is not None:
 
     with st.expander("Data preview"):
         st.write(df.head(5))
+
+    #  DATE FORMAT
+    st.write(text.date_title)
+    st.write(text.date_text)
+
+    with st.expander("Expand for more info"):
+        st.info(text.date_text_extra)
+
+    date_format = st.text_input("", value=default_values.get("date_format"))
+
+    # Format the dataframe with the date format
+
+    if date_format != "None":
+        df = format_dataframe(df, date_format=date_format)
+
+    else:
+        st.error("Please input a date format")

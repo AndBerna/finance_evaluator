@@ -86,3 +86,35 @@ Below you can see a preview of your file. You can see which index each column ha
 headers_validation_text = """
 Below you can a preview with the updated headers names. If you are happy with them, proceed.
 """
+
+date_title = """##### Which is the date format of your file?
+"""
+date_text = """ In order to process the dates correctly, we need to know the format of your dates. 
+We need to do it following the [Python datetime format](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes).
+"""
+
+date_text_extra = """
+
+Your csv might look like this one:
+```
+date;concept;amount;currency
+2021-01-31;Salary;1000.00;EUR
+2021-01-31;Rent;-500.00;EUR
+etc...
+```
+In this case the date format is `%Y-%m-%d` where `%Y` is the year, `%m` is the month and `%d` is the day. 
+We also indicate the hyphens `-` to separate the date components.
+
+    You can find a detailed list of the different date formats [here](https://strftime.org/).
+
+
+Other common date formats are:
+
+- `%d/%m/%Y`   : 31/01/2021
+- `%m/%d/%Y`   : 01/31/2021
+- `%d-%m-%Y`   : 31-01-2021
+- `%d.%m.%y`   : 31.01.21
+- `%B %d, %Y`  : January 31, 2021
+- `%d %b %Y`   : 31 Jan 2021
+
+"""
