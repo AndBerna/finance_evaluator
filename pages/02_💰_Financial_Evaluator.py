@@ -132,6 +132,23 @@ account_balance_graph = plot_bar(
 
 st.plotly_chart(account_balance_graph, use_container_width=True)
 
+
+# Add graph with the savings each months
+
+savings_graph = plot_bar(
+    data=monthly_data,
+    xdata="date",
+    ydata="rolling_savings",
+    title="Average Savings per month",
+    color_setup=monthly_data["rolling_savings"] > 0,
+    color=["green", "red"],
+    xaxis_title="Date",
+    yaxis_title="Amount",
+)
+
+st.plotly_chart(savings_graph, use_container_width=True)
+
+
 # TRENDS
 
 # Calculate the trends for the different variables
