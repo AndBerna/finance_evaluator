@@ -131,3 +131,26 @@ account_balance_graph = plot_bar(
 )
 
 st.plotly_chart(account_balance_graph, use_container_width=True)
+
+# TRENDS
+
+# Calculate the trends for the different variables
+
+# For income and expenses we use the custom data
+income_trend, monthly_data_custom = ft.get_trend(monthly_data_custom, "rolling_income")
+expenses_trend, monthly_data_custom = ft.get_trend(
+    monthly_data_custom, "rolling_positive_expenses"
+)
+# For savings we use the raw data
+savings_trend, monthly_data = ft.get_trend(monthly_data, "savings")
+saving_rate_trend, monthly_data = ft.get_trend(monthly_data, "rolling_saving_rate")
+
+# For the account balance predictions we use the account balance data
+acount_trend, account_balance, account_model = ft.get_trend(
+    account_balance, "account", retun_model=True
+)
+
+# To estimate the account balance at the end of the year we need to add the months that are missing
+months_to_end_of_year = 12 - account_balance.date.max().month
+target = np.array(account_balance.index.max() + months_to_end_of_year).reshape(-1, 1)
+predicted_account_balance = account_model.predict(target)[0, 0]
