@@ -41,3 +41,43 @@ In this case the thousand separator is `,` and the decimal separator is `.`
 You can open the file with any text editor or Excel to check it.
 Once you have done it, please input it in the boxes below.
 """
+
+
+headers_title = """##### Which are the headers of your file?"""
+
+
+headers_extra_text = """
+Your csv might look like this one:
+```
+date;concept;amount;currency
+2021-01-01;Salary;1000.00;EUR
+2021-01-01;Rent;-500.00;EUR
+etc...
+```
+In this case your file  has predefined headers are `date`, `concept`, `amount` and `currency`
+
+But in might also have no headers at all:
+
+```
+2021-01-01;Salary;1000.00;EUR
+2021-01-01;Rent;-500.00;EUR
+etc...
+```
+In both cases you need to input the headers in the boxes below.
+
+"""
+
+headers_text = """
+We need to identify the following headers: 
+
+`date` : The date of the transaction
+
+`concept` : The concept of the transaction
+
+`amount` : The amount of the transaction
+
+`account` : The balance in your savings account
+
+Below you can see a preview of your file. You can see which index each column has.
+
+"""

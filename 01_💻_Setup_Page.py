@@ -79,3 +79,15 @@ if file is not None or st.session_state.df is not None:
     decimal_separator = st.text_input(
         "Decimal separator", value=default_values.get("decimal_separator")
     )
+
+    # HEADERS
+
+    st.write(text.headers_title)
+
+    with st.expander("Expand for more info"):
+        st.info(text.headers_extra_text)
+
+    st.write(text.headers_text)
+
+    # Ask the user if the file already has headers
+    existing_headers = st.checkbox("Check the box if your file already has headers")
