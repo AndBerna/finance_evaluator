@@ -196,3 +196,6 @@ if file is not None or st.session_state.df is not None:
     # Final instructions
     st.write(text.final_title)
     st.write(text.final_text)
+
+    # Save as default button
+    save_as_default_button(default=default_values, default_file_path=default_file_path)
