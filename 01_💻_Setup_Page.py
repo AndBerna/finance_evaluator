@@ -42,11 +42,13 @@ st.write(text.load_file_title)
 # Load the file
 file = st.file_uploader("", type=["csv"], key="file_uploader")
 
-
 # Initialize session state variables : This will allow sharing the data between pages
 
 if "df" not in st.session_state:
     st.session_state["df"] = None
+
+if "currency" not in st.session_state:
+    st.session_state["currency"] = None
 
 
 # Once the file is loaded, load the rest of the setup instructions
@@ -171,3 +173,21 @@ if file is not None or st.session_state.df is not None:
 
     else:
         st.error("Please input a date format")
+
+    # CURRENCY
+
+    st.write(text.currency_title)
+    st.write(text.currency_text)
+
+    currency = st.text_input("", value=default_values.get("currency"))
+
+    # Default values for the next time the user loads the app
+    default_values = {
+        "csv_separator": csv_separator,
+        "thousands_separator": thousands_separator,
+        "decimal_separator": decimal_separator,
+        "existing_headers": existing_headers,
+        "selected_columns": selected_columns,
+        "date_format": date_format,
+        "currency": currency,
+    }

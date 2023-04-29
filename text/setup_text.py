@@ -118,3 +118,5 @@ Other common date formats are:
 - `%d %b %Y`   : 31 Jan 2021
 
 """
+currency_title = """##### Which is your currency?"""
+currency_text = """Please input the currency of your transactions. It should be the same for all of them."""
