@@ -74,3 +74,12 @@ with st.sidebar:
             label_col="concept",
             default_file_path=income_to_drop_file_path,
         )
+
+
+# MAIN PAGE
+
+st.title("Financial Evaluator")
+
+st.write(text.intro_text)
+with st.expander("Important information"):
+    st.info(text.to_drop_text)
