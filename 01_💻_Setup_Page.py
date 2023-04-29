@@ -42,6 +42,7 @@ st.write(text.load_file_title)
 # Load the file
 file = st.file_uploader("", type=["csv"], key="file_uploader")
 
+
 # Initialize session state variables : This will allow sharing the data between pages
 
 if "df" not in st.session_state:
@@ -191,3 +192,7 @@ if file is not None or st.session_state.df is not None:
         "date_format": date_format,
         "currency": currency,
     }
+
+    # Final instructions
+    st.write(text.final_title)
+    st.write(text.final_text)
