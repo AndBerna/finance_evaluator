@@ -47,3 +47,35 @@ file = st.file_uploader("", type=["csv"], key="file_uploader")
 
 if "df" not in st.session_state:
     st.session_state["df"] = None
+
+
+# Once the file is loaded, load the rest of the setup instructions
+
+if file is not None or st.session_state.df is not None:
+    # ASK THE USER FOR THE FORMAT OF THE FILE
+    st.write(text.format_file_title)
+    st.write(text.format_file_text)
+
+    # CSV SEPARATOR
+    st.write(text.csv_separator_text)
+
+    with st.expander("Expand for more info"):
+        st.info(text.csv_separator_extra_text)
+
+    csv_separator = st.text_input(
+        "CSV Separator", value=default_values.get("csv_separator")
+    )
+
+    # THOUSANDS AND DECIMAL SEPARATOR
+
+    st.write(text.thousands_decimals_separator_title)
+
+    with st.expander("Expand for more info"):
+        st.info(text.thousands_decimals_separator_extra_text)
+
+    thousands_separator = st.text_input(
+        "Thousands separator", value=default_values.get("thousands_separator")
+    )
+    decimal_separator = st.text_input(
+        "Decimal separator", value=default_values.get("decimal_separator")
+    )
