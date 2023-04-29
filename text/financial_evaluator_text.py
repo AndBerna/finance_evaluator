@@ -1,5 +1,3 @@
-from utils.streamlit_utils import colorize
-
 intro_text = """
 
 In this page you can see the your financial analysis. It is organized as it follows:
@@ -30,16 +28,6 @@ The results show the average  values of the last 3 months.  In order to reduce t
 Remember that the income and expenses calculations exclude the concepts indicated before. Saving calculations use the raw data
 """
 
-status = f"""
-Your average income right now is {colorize(monthly_data_custom["rolling_income"].iloc[-1])} {currency} per month
-
-Your average expenses right now are {colorize(monthly_data_custom["rolling_positive_expenses"].iloc[-1], is_expenses=True)} {currency} per month
-
-You are currently saving, on average, {colorize(monthly_data["rolling_savings"].iloc[-1])} {currency} per month
-
-Your average saving rate (savings/income) is {colorize(monthly_data["rolling_saving_rate"].iloc[-1])}%
-"""
-
 
 trends_title = """### Trends"""
 trends_extra = """
@@ -48,14 +36,4 @@ i.e if your records are of one year is the last year trend.
 Results are calculated fitting a linear regression model to the data and using the 3-month rolling means.
 
 Remember that the income and expenses calculations exclude the concepts indicated before. Saving calculations use the raw data
-"""
-trends = f"""
-
-Your income has been  increasing/decreasing in average by {colorize(income_trend)} {currency} each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
-
-Your expenses has been  increasing/decreasing in average by {colorize(expenses_trend, is_expenses=True)} {currency}  each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
-
-Your savings has been  increasing/decreasing in average by  {colorize(savings_trend)} {currency}  each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
-
-Your expected total savings in your account are  {colorize(predicted_account_balance)} {currency}  by the end of the year {account_balance.date.max().year}
 """

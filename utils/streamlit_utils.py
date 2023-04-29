@@ -44,6 +44,21 @@ def create_multiselect_box(df, value_col, label_col, default_file_path):
         return []
 
 
+def colorize(value, is_expenses=False):
+    if value > 0:
+        if not is_expenses:
+            return f'<span style="color:green">{value:,.2f}</span>'
+        else:
+            return f'<span style="color:red">{value:,.2f}</span>'
+    elif value < 0:
+        if not is_expenses:
+            return f'<span style="color:red">{value:,.2f}</span>'
+        else:
+            return f'<span style="color:green">{value:,.2f}</span>'
+    else:
+        return f'<span style="color:green">{value:,.2f}</span>'
+
+
 def plot_bar(
     data, xdata, ydata, title, xaxis_title, yaxis_title, color="green", **kwargs
 ):

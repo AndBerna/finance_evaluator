@@ -112,10 +112,22 @@ account_balance = data.resample("M", on="date")["account"].last().reset_index()
 
 
 # CURRENT STATUS ANALYSIS
+
+status = f"""
+Your average income right now is {colorize(monthly_data_custom["rolling_income"].iloc[-1])} {currency} per month
+
+Your average expenses right now are {colorize(monthly_data_custom["rolling_positive_expenses"].iloc[-1], is_expenses=True)} {currency} per month
+
+You are currently saving, on average, {colorize(monthly_data["rolling_savings"].iloc[-1])} {currency} per month
+
+Your average saving rate (savings/income) is {colorize(monthly_data["rolling_saving_rate"].iloc[-1])}%
+"""
+
+
 st.write(text.current_status_title)
 with st.expander("Expand for more info"):
     st.info(text.current_status_text)
-st.write(text.status, unsafe_allow_html=True)
+st.write(status, unsafe_allow_html=True)
 
 
 # Plot graph of the savings account
@@ -172,11 +184,22 @@ months_to_end_of_year = 12 - account_balance.date.max().month
 target = np.array(account_balance.index.max() + months_to_end_of_year).reshape(-1, 1)
 predicted_account_balance = account_model.predict(target)[0, 0]
 
+trends = """
+
+Your income has been  increasing/decreasing in average by {colorize(income_trend)} {currency} each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
+
+Your expenses has been  increasing/decreasing in average by {colorize(expenses_trend, is_expenses=True)} {currency}  each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
+
+Your savings has been  increasing/decreasing in average by  {colorize(savings_trend)} {currency}  each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
+
+Your expected total savings in your account are  {colorize(predicted_account_balance)} {currency}  by the end of the year {account_balance.date.max().year}
+"""
+
 
 st.write(text.trends_title)
 with st.expander("Expand for more info"):
     st.info(text.trends_extra)
-st.write(text.trends, unsafe_allow_html=True)
+st.write(trends, unsafe_allow_html=True)
 
 # Add graph with the average income and their trends
 
