@@ -16,7 +16,9 @@ Date: 17/04/2023
 import numpy as np
 import streamlit as st
 
+import text.financial_evaluator_text as text
 import utils.financial_tools as ft
+from utils.streamlit_utils import create_multiselect_box
 
 # for k, v in st.session_state.items():
 #     st.session_state[k] = v
@@ -47,3 +49,28 @@ currency = st.session_state["currency"]
 # Calculate income and expenses
 
 data = ft.add_income_and_expenses(data)
+
+# SETUP THE SIDEBAR
+
+st.sidebar.title("Optional Settings")
+
+with st.sidebar:
+    # Create a user interface to drop expenses
+
+    with st.sidebar.expander("Expenses to drop"):
+        expenses_to_drop = create_multiselect_box(
+            df=data,
+            value_col="expenses",
+            label_col="concept",
+            default_file_path=expenses_to_drop_file_path,
+        )
+
+    # Create a user interface to drop incomes
+
+    with st.sidebar.expander("Income to drop"):
+        income_to_drop = create_multiselect_box(
+            df=data,
+            value_col="income",
+            label_col="concept",
+            default_file_path=income_to_drop_file_path,
+        )
