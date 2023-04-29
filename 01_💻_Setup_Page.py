@@ -106,3 +106,51 @@ if file is not None or st.session_state.df is not None:
     else:
         # keep the dataframe if it is already laoded in the session state
         df = st.session_state.df
+
+    with st.expander("Data preview"):
+        st.write(df.head(5))
+
+    # Set default values for selected columns
+    default_selected_columns = default_values.get("selected_columns", {})
+    selected_columns = {}
+
+    #  Ask the user to map the columns to the right names
+    # THis are the names that we want to map the columns to. We will use them in the rest of the app
+    column_names = ["date", "concept", "amount", "account"]
+
+    # Iterate over the column names and ask the user to select the corresponding column
+    for name in column_names:
+        # Check if the column is already mapped
+        available_columns = [
+            col for col in df.columns if col not in selected_columns.values()
+        ]
+        # load the default value if it exists
+        default_col = default_selected_columns.get(name)
+
+        # Add the default value to the list of available columns if it is not already there
+        if default_col is not None and default_col not in available_columns:
+            available_columns.append(default_col)
+
+        # Ask the user to select the column
+        selected_col = st.selectbox(
+            f"Which column corresponds to {name}? ",
+            available_columns,
+        )
+
+        # Save the selected column
+        selected_columns[name] = selected_col
+
+    # Assign column names to dataframe
+    for name, col in selected_columns.items():
+        df = df.rename(columns={col: name})
+
+    # Label remaining columns as "other_X" where X is a number
+    for i, col in enumerate(df.columns):
+        if col not in column_names:
+            df = df.rename(columns={col: f"other_{i}"})
+
+    # Show the data to the user for validation
+    st.write(text.headers_validation_text)
+
+    with st.expander("Data preview"):
+        st.write(df.head(5))

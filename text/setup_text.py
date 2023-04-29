@@ -81,3 +81,8 @@ We need to identify the following headers:
 Below you can see a preview of your file. You can see which index each column has.
 
 """
+
+
+headers_validation_text = """
+Below you can a preview with the updated headers names. If you are happy with them, proceed.
+"""
