@@ -120,3 +120,10 @@ Other common date formats are:
 """
 currency_title = """##### Which is your currency?"""
 currency_text = """Please input the currency of your transactions. It should be the same for all of them."""
+
+
+final_title = """
+
+### 3. You are ready to go!"""
+final_text = """ Click the Financial Evaluator tab in the top left corner to continue.
+    Press the Save as Default button to save your settings for future use."""
