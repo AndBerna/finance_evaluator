@@ -39,3 +39,23 @@ You are currently saving, on average, {colorize(monthly_data["rolling_savings"].
 
 Your average saving rate (savings/income) is {colorize(monthly_data["rolling_saving_rate"].iloc[-1])}%
 """
+
+
+trends_title = """### Trends"""
+trends_extra = """
+The results show the trends of your finances. The trend is calculated along the whole period provided in the csv file. 
+i.e if your records are of one year is the last year trend. 
+Results are calculated fitting a linear regression model to the data and using the 3-month rolling means.
+
+Remember that the income and expenses calculations exclude the concepts indicated before. Saving calculations use the raw data
+"""
+trends = f"""
+
+Your income has been  increasing/decreasing in average by {colorize(income_trend)} {currency} each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
+
+Your expenses has been  increasing/decreasing in average by {colorize(expenses_trend, is_expenses=True)} {currency}  each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
+
+Your savings has been  increasing/decreasing in average by  {colorize(savings_trend)} {currency}  each month  since {monthly_data_custom.date.min().strftime("%B %Y")}
+
+Your expected total savings in your account are  {colorize(predicted_account_balance)} {currency}  by the end of the year {account_balance.date.max().year}
+"""

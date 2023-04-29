@@ -154,3 +154,9 @@ acount_trend, account_balance, account_model = ft.get_trend(
 months_to_end_of_year = 12 - account_balance.date.max().month
 target = np.array(account_balance.index.max() + months_to_end_of_year).reshape(-1, 1)
 predicted_account_balance = account_model.predict(target)[0, 0]
+
+
+st.write(text.trends_title)
+with st.expander("Expand for more info"):
+    st.info(text.trends_extra)
+st.write(text.trends, unsafe_allow_html=True)
