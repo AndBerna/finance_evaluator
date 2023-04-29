@@ -42,6 +42,11 @@ st.write(text.load_file_title)
 # Load the file
 file = st.file_uploader("", type=["csv"], key="file_uploader")
 
+# Clear session state when a new file is uploaded : This allows to upload a new file and reload the data
+if file is not None:
+    for key in st.session_state.keys():
+        if key != "file_uploader":
+            del st.session_state[key]
 
 # Initialize session state variables : This will allow sharing the data between pages
 
@@ -199,3 +204,7 @@ if file is not None or st.session_state.df is not None:
 
     # Save as default button
     save_as_default_button(default=default_values, default_file_path=default_file_path)
+
+    # Save the formatted dataframe and the currency in the session state
+    st.session_state.df = df
+    st.session_state["currency"] = currency
