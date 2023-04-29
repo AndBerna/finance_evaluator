@@ -90,3 +90,22 @@ index_to_drop = data[
 ].index
 
 data_custom = data.drop(index_to_drop)
+
+# Monthly data : Raw data
+# For the savings we need the raw data since it is the global balance of inoome - expenses
+monthly_data = ft.calculate_monthly_data(data)
+monthly_data = ft.add_savings(
+    monthly_data,
+)
+monthly_data = ft.calculate_averages(monthly_data)
+
+# Monthly data : Custom data
+# For the income and expenses analysis we use the custom user data
+
+monthly_data_custom = ft.calculate_monthly_data(data_custom)
+monthly_data_custom = ft.add_savings(monthly_data_custom)
+monthly_data_custom = ft.calculate_averages(monthly_data_custom)
+
+# Monthly data : Savings account
+# For the savings account we need to take the last value available for each month
+account_balance = data.resample("M", on="date")["account"].last().reset_index()
