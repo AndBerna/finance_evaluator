@@ -81,6 +81,24 @@ def plot_bar(
         yaxis=dict(showgrid=True, dtick=dtick),
     )
 
+    for i, ytrend in enumerate(kwargs.get("ytrend", [])):
+        fig.add_trace(
+            go.Scatter(
+                x=data[xdata] if kwargs.get("add_trace", True) else None,
+                y=ytrend,
+                mode="lines",
+                line=dict(color=kwargs.get("trendcolor", None)[i], width=3),
+                name=kwargs.get("trend_labels", None)[i],
+            )
+        )
+
+    currency = st.session_state["currency"]
+    # Add hoover information to the plot
+    fig.update_traces(
+        # hovertemplate="<br> Date: %{x|%b %Y}<br> Amount: %{y:,.2f} {currency}<extra></extra>",
+        hovertemplate=f"<br>Date: %{{x|%b %Y}}<br>Amount: %{{y:.2f}} {currency} <extra></extra>",
+    )
+
     fig.update_layout(
         showlegend=kwargs.get("showlegend", False),
         legend=dict(

@@ -18,7 +18,7 @@ import streamlit as st
 
 import text.financial_evaluator_text as text
 import utils.financial_tools as ft
-from utils.streamlit_utils import create_multiselect_box, plot_bar
+from utils.streamlit_utils import colorize, create_multiselect_box, plot_bar
 
 # for k, v in st.session_state.items():
 #     st.session_state[k] = v
@@ -160,3 +160,27 @@ st.write(text.trends_title)
 with st.expander("Expand for more info"):
     st.info(text.trends_extra)
 st.write(text.trends, unsafe_allow_html=True)
+
+# Add graph with the average income and their trends
+
+income_expenses_graph = plot_bar(
+    data=monthly_data_custom,
+    xdata="date",
+    ydata=["rolling_income", "rolling_positive_expenses"],
+    title=" Average Income and Expenses per month",
+    color=["green", "red"],
+    xaxis_title="Date",
+    yaxis_title="Amount",
+    data_labels=["Average Income ", "Average Expenses"],
+    # Optional parameters to add the trend lines
+    add_trace=True,
+    ytrend=[
+        monthly_data_custom["rolling_income_trend"],
+        monthly_data_custom["rolling_positive_expenses_trend"],
+    ],
+    trend_labels=["Income Trend", "Expenses Trend"],
+    trendcolor=["lightgreen", "orange"],
+    showlegend=True,
+)
+
+st.plotly_chart(income_expenses_graph, use_container_width=True)
