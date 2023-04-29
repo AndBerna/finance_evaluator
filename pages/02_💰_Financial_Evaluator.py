@@ -83,3 +83,10 @@ st.title("Financial Evaluator")
 st.write(text.intro_text)
 with st.expander("Important information"):
     st.info(text.to_drop_text)
+
+# drop the expenses and income selected by the user in the sidebar
+index_to_drop = data[
+    data["concept"].isin(expenses_to_drop) | data["concept"].isin(income_to_drop)
+].index
+
+data_custom = data.drop(index_to_drop)
