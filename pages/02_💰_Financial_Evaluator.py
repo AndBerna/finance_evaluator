@@ -18,7 +18,7 @@ import streamlit as st
 
 import text.financial_evaluator_text as text
 import utils.financial_tools as ft
-from utils.streamlit_utils import colorize, create_multiselect_box, plot_bar
+from utils.streamlit_utils import create_multiselect_box, plot_bar
 
 # for k, v in st.session_state.items():
 #     st.session_state[k] = v
@@ -116,3 +116,18 @@ st.write(text.current_status_title)
 with st.expander("Expand for more info"):
     st.info(text.current_status_text)
 st.write(text.status, unsafe_allow_html=True)
+
+
+# Plot graph of the savings account
+
+account_balance_graph = plot_bar(
+    data=account_balance,
+    xdata="date",
+    ydata="account",
+    title=f"Savings account evolution in {currency}",
+    color=["green"],
+    xaxis_title="Date",
+    yaxis_title="Account Balance",
+)
+
+st.plotly_chart(account_balance_graph, use_container_width=True)

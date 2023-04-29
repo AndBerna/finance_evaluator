@@ -1,5 +1,7 @@
 import json
 
+import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 
@@ -40,3 +42,54 @@ def create_multiselect_box(df, value_col, label_col, default_file_path):
             Please delete the file  {default_file_path}"""
         )
         return []
+
+
+def plot_bar(
+    data, xdata, ydata, title, xaxis_title, yaxis_title, color="green", **kwargs
+):
+    dtick = data[ydata[0]].max() / 10 if type(ydata) == list else data[ydata].max() / 10
+    axis_title_font_size = 18
+    axis_tickfont_size = 15
+
+    real_labels = kwargs.get("data_labels", None)
+
+    fig = px.bar(
+        data,
+        x=xdata,
+        y=ydata,
+        title=title,
+        height=500,
+        color=kwargs.get("color_setup", None),
+        color_discrete_sequence=color,
+        barmode="overlay",
+        opacity=0.9,
+    )
+
+    if real_labels:
+        labels_dict = {k: v for k, v in zip(data[ydata], real_labels)}
+        fig.for_each_trace(lambda t: t.update(name=labels_dict[t.name]))
+
+    fig.update_layout(
+        title_font_size=20,
+        xaxis_title=xaxis_title,
+        xaxis_title_font_size=axis_title_font_size,
+        xaxis_tickfont_size=axis_tickfont_size,
+        yaxis_title=yaxis_title,
+        yaxis_tickfont_size=axis_tickfont_size,
+        yaxis_title_font_size=axis_title_font_size,
+        xaxis=dict(showgrid=True),
+        yaxis=dict(showgrid=True, dtick=dtick),
+    )
+
+    fig.update_layout(
+        showlegend=kwargs.get("showlegend", False),
+        legend=dict(
+            x=0.01,
+            y=1,
+            font=dict(size=14),
+            bgcolor="rgba(0,0,0,0)",
+        ),
+        # hovermode="x unified",
+    )
+
+    return fig
