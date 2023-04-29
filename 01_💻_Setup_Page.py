@@ -22,3 +22,19 @@ try:
         default_values = json.load(f)
 except FileNotFoundError:
     default_values = {}
+
+# Setup the page
+st.set_page_config(
+    page_title="Financial Evaluator",
+    page_icon=":moneybag:",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# Setup the sidebar
+st.sidebar.title("")
+
+# Load  intro text
+st.title("Financial Evaluator")
+st.write(text.intro_text)
+st.write(text.load_file_title)
