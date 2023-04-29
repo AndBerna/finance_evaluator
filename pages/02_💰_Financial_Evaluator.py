@@ -16,6 +16,8 @@ Date: 17/04/2023
 import numpy as np
 import streamlit as st
 
+import utils.financial_tools as ft
+
 # for k, v in st.session_state.items():
 #     st.session_state[k] = v
 st.set_page_config(
@@ -41,3 +43,7 @@ except (KeyError, AttributeError):
     st.stop()
 
 currency = st.session_state["currency"]
+
+# Calculate income and expenses
+
+data = ft.add_income_and_expenses(data)
