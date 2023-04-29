@@ -18,7 +18,7 @@ import streamlit as st
 
 import text.financial_evaluator_text as text
 import utils.financial_tools as ft
-from utils.streamlit_utils import create_multiselect_box
+from utils.streamlit_utils import colorize, create_multiselect_box, plot_bar
 
 # for k, v in st.session_state.items():
 #     st.session_state[k] = v
@@ -109,3 +109,10 @@ monthly_data_custom = ft.calculate_averages(monthly_data_custom)
 # Monthly data : Savings account
 # For the savings account we need to take the last value available for each month
 account_balance = data.resample("M", on="date")["account"].last().reset_index()
+
+
+# CURRENT STATUS ANALYSIS
+st.write(text.current_status_title)
+with st.expander("Expand for more info"):
+    st.info(text.current_status_text)
+st.write(text.status, unsafe_allow_html=True)
