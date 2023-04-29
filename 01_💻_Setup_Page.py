@@ -38,3 +38,12 @@ st.sidebar.title("")
 st.title("Financial Evaluator")
 st.write(text.intro_text)
 st.write(text.load_file_title)
+
+# Load the file
+file = st.file_uploader("", type=["csv"], key="file_uploader")
+
+
+# Initialize session state variables : This will allow sharing the data between pages
+
+if "df" not in st.session_state:
+    st.session_state["df"] = None
