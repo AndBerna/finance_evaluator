@@ -91,3 +91,18 @@ if file is not None or st.session_state.df is not None:
 
     # Ask the user if the file already has headers
     existing_headers = st.checkbox("Check the box if your file already has headers")
+
+    # load the csv as a dataframe
+
+    if st.session_state.df is None:
+        df = load_csv(
+            file=file,
+            csv_separator=csv_separator,
+            thousands_separator=thousands_separator,
+            decimal_separator=decimal_separator,
+            existing_headers=existing_headers,
+        )
+
+    else:
+        # keep the dataframe if it is already laoded in the session state
+        df = st.session_state.df
